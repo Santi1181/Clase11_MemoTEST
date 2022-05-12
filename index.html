@@ -16,14 +16,18 @@
 
     <div class="container mt-4">
         <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6">
+            <div class="col-3">
+                <p>Movimientos Pendientes # <strong id="movimientos">20</strong></p>
+            </div>
+            <div class="col-4">
                 <div class="alert alert-primary" role="alert" id="mensajeInicio">
                     Presiona "Comenzar" para empezar el juego!!!
                   </div>
             </div>
-            <div class="col-3">
+            <div class="col-5">
                 <button type="button" class="btn btn-primary" id="empezarJuego">Comenzar</button>
+                <button type="button" class="btn btn-primary" id="reanudar">Reanudar</button>
+            
             </div>
            
             
@@ -36,9 +40,9 @@
        
         <div class="row">
             <div class="col-3"></div>
-            
+           
             <div class="col-6">
-                <div class="container bg-secondary">
+                <div class="container bg-secondary" id="principal"  >
                     <div class="row gap-3">
                         <div class="col border grilla" id="item1"></div>
                         <div class="col border grilla" id="item2"></div>

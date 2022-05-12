@@ -16,16 +16,35 @@ const color15 = "orange"
 const color16 = "yellow"
 
 let $elementosGrilla = document.querySelectorAll('.grilla')
+
 let arrayColores = []
 let coloresEnTablero = []
 let arrayMovimientos = []
+let sinPendientes = 0
+let movimientosJuego = 20
 
-document.querySelector('#empezarJuego').onclick = function(event) {
+document.getElementById('empezarJuego').onclick = function(event) {
+    iniciarJuego("Juego en Curso!!!",true,"auto")
+}
+
+document.getElementById('reanudar').onclick = function(event) {
+    iniciarJuego('Presiona "Comenzar" para empezar el juego!!!',"","none") 
+}
+
+function iniciarJuego(mensaje,habilitado,posicionamiento){
+    $elementosGrilla.forEach(function($elemento){
+        $elemento.style.backgroundColor = 'darkcyan'
+        $elemento.onclick = manejarJuego
+    }) 
     arrayColores = []
     coloresEnTablero = []
     cargarColoresEnArray()
     asignarColoresATablero()
-    document.querySelector('#mensajeInicio').innerText = "Juego en Curso!!!"
+    actualizarEstado(mensaje,"reanudar")
+    actualizarMovimientos(movimientosJuego = 20)
+    document.getElementById('mensajeInicio').innerText = mensaje
+    document.getElementById('empezarJuego').disabled = habilitado
+    manejarTablero(posicionamiento)
 }
 
 function cargarColoresEnArray (){
@@ -39,86 +58,88 @@ function asignarColoresATablero (){
     }
 }
 
-
-document.querySelectorAll('.col').forEach(function($elemento) {
-    $elemento.onclick = manejarJuego;
-})
-
 function manejarJuego(e){
-  
+    
     arrayMovimientos.push(e)
     document.getElementById(e.target.id).style.backgroundColor = coloresEnTablero[e.target.id.substring(4,6) - 1]
+    deshabilitarSeleccion(e.target.id)
 
     if (arrayMovimientos.length === 2) {
-
-        if (coloresEnTablero[arrayMovimientos[0].target.id.substring(4,6) - 1] === coloresEnTablero[arrayMovimientos[1].target.id.substring(4,6) - 1]){
-
-            marcarCorrectos(arrayMovimientos[0].target.id,arrayMovimientos[1].target.id) 
-           
-
-        } else {
-
-            prepararProximaJugada(arrayMovimientos[0].target.id,arrayMovimientos[1].target.id)
-
-        }
-
+        controlarSeleccion(arrayMovimientos[0],arrayMovimientos[1])
         arrayMovimientos = []
+        movimientosJuego --
+        actualizarMovimientos(movimientosJuego)
     }
 
+    $elementosGrilla.forEach(function($elemento){
+        if ($elemento.style.backgroundColor === 'white'){
+            sinPendientes += 1
+        }        
+    })
 
-    // arrayMovimientos.push[coloresEnTablero[e.target.id.substring(4,6) - 1]]
+    if (sinPendientes === 16 ) {
+        actualizarEstado("El Juego a terminado. Has Ganado!!!","gano")
+    } else if (movimientosJuego === 0){
+        actualizarEstado("Perdiste!!! No quedan movimientos","perdio")
+        manejarTablero("none")
+    }
 
-    
-    // console.log(e)
-    // console.log(e.target)
-    // console.log(e.target.id.substring(4,6))
-    
+    sinPendientes = 0
+
 }
 
+function actualizarEstado(mensaje,momento){
+    let $estado = document.getElementById('mensajeInicio')
+    $estado.textContent = mensaje
+    if (momento === "perdio"){
+        $estado.classList.remove('alert-primary')
+        $estado.classList.add('alert-danger')
+    }   else if ( momento === "gano") {
+        $estado.classList.remove('alert-primary')
+        $estado.classList.add('alert-success')
+    }   else if (momento === "reanudar"){
+        $estado.classList.remove('alert-success')
+        $estado.classList.remove('alert-danger')            
+        $estado.classList.add('alert-primary')    
+        }
+}   
+
+function controlarSeleccion(elemento1,elemento2){
+    if (coloresEnTablero[elemento1.target.id.substring(4,6) - 1] === coloresEnTablero[elemento2.target.id.substring(4,6) - 1]){
+        marcarCorrectos(elemento1.target.id,elemento2.target.id) 
+    } else {
+        prepararProximaJugada(elemento1.target.id,elemento2.target.id)
+    }
+}
 
 function marcarCorrectos(elemento1,elemento2){
-    document.getElementById(elemento1).onclick = null
-    document.getElementById(elemento2).onclick = null
-    document.getElementById(elemento1).style.backgroundColor = 'white'
-    document.getElementById(elemento2).style.backgroundColor = 'white'
+    actualizarColorSeleccion(elemento1,'white')
+    actualizarColorSeleccion(elemento2,'white')
 }
 
 function prepararProximaJugada(elemento1,elemento2) {
-    setTimeout(function(){document.getElementById(elemento1).style.backgroundColor = 'darkcyan'},500) 
-    setTimeout(function(){document.getElementById(elemento2).style.backgroundColor = 'darkcyan'},1000) 
-
+    setTimeout(function(){actualizarColorSeleccion(elemento1,'darkcyan')},300) 
+    setTimeout(function(){actualizarColorSeleccion(elemento2,'darkcyan')},500) 
+    habilitarSeleccion(elemento1)
+    habilitarSeleccion(elemento2)
 }
 
-function validarFinJuego(){
-    let pendientes = 0
-    $recuadrosGrilla = document.querySelectorAll('.col')
-
-    for (let i=0;i < $recuadrosGrilla.length;i++){
-        if (document.getElementById($recuadrosGrilla[i].target.id).style.backgroundColor != 'white') {
-            pendientes += 1
-        }
-    }
-
-    return pendientes
+function deshabilitarSeleccion(elemento){
+    document.getElementById(elemento).onclick = null
 }
 
+function habilitarSeleccion(elemento){
+    document.getElementById(elemento).onclick = manejarJuego
+}
 
+function actualizarMovimientos(movimientos){
+    document.getElementById('movimientos').innerText = movimientos
+}
 
-// $elementosGrilla.forEach (function(recuadro) {
-//     // console.log(recuadro.id)
-//     // recuadro.style.background = 'red'
+function actualizarColorSeleccion(elemento,color){
+    document.getElementById(elemento).style.backgroundColor = color
+}
 
-//     cargarColoresEnArray()
-
-
-
-// })
-
-
-
-
-
-
-
-
-
+function manejarTablero(accion){
+    document.querySelector('#principal').style.pointerEvents = accion
+}

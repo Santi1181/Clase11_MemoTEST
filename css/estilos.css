@@ -4,3 +4,7 @@
     margin: 10px;
     background-color: darkcyan;
 }
+
+#principal {
+    pointer-events: none;
+}
