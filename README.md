@@ -1,2 +1,0 @@
-# MemoTEST
-Juego MemoTEST
