@@ -1,0 +1,22 @@
+{
+  "name": "clase11_memotest",
+  "version": "1.0.0",
+  "description": "Juego MemoTEST - Clase 11 - Argentina Programa",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Santi1181/Clase11_MemoTEST.git"
+  },
+  "author": "SantiagoA",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Santi1181/Clase11_MemoTEST/issues"
+  },
+  "homepage": "https://github.com/Santi1181/Clase11_MemoTEST#readme",
+  "dependencies": {
+    "bootstrap": "^5.1.3"
+  }
+}

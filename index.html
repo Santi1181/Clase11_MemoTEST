@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Juego MemoTEST - Clase 11</title>
+
+
+</head>
+
+<body>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-3">
+                <p>Movimientos Pendientes # <strong id="movimientos">20</strong></p>
+            </div>
+            <div class="col-4">
+                <div class="alert alert-primary" role="alert" id="mensajeInicio">
+                    Presiona "Comenzar" para empezar el juego!!!
+                  </div>
+            </div>
+            <div class="col-5">
+                <button type="button" class="btn btn-primary" id="empezarJuego">Comenzar</button>
+                <button type="button" class="btn btn-primary" id="reanudar">Reanudar</button>
+            
+            </div>
+           
+            
+        </div>
+    </div>
+
+    
+
+    <div class="container mt-3 ">
+       
+        <div class="row">
+            <div class="col-3"></div>
+           
+            <div class="col-6">
+                <div class="container bg-secondary" id="principal"  >
+                    <div class="row gap-3">
+                        <div class="col border grilla" id="item1"></div>
+                        <div class="col border grilla" id="item2"></div>
+                        <div class="col border grilla" id="item3"></div>
+                        <div class="col border grilla" id="item4"></div>
+                    </div>
+
+                    <div class="row gap-3">
+                        <div class="col border grilla" id="item5"></div>
+                        <div class="col border grilla" id="item6"></div>
+                        <div class="col border grilla" id="item7"></div>
+                        <div class="col border grilla" id="item8"></div>
+                    </div>
+
+                    <div class="row gap-3">
+                        <div class="col border grilla" id="item9"></div>
+                        <div class="col border grilla" id="item10"></div>
+                        <div class="col border grilla" id="item11"></div>
+                        <div class="col border grilla" id="item12"></div>
+                    </div>
+
+                    <div class="row gap-3">
+                        <div class="col border grilla" id="item13"></div>
+                        <div class="col border grilla" id="item14"></div>
+                        <div class="col border grilla" id="item15"></div>
+                        <div class="col border grilla" id="item16"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-3"></div>
+
+        </div>
+    </div>
+
+    <script src="js/memoTest.js"></script>
+</body>
+
+</html>
+
