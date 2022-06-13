@@ -21,3 +21,6 @@ Mensaje que se muestra al finalizar el juego habiendo ganado el mismo:
 ![image](https://user-images.githubusercontent.com/97684320/173368380-7a0a329d-a20f-422d-888b-e6355efa71e6.png)
 
 
+
+
+
